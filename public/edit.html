@@ -7,7 +7,26 @@
   <title>Recipe App</title>
 </head>
 <body>
-  
+  <div class="container">
+    <input type="text" class="title-input" placeholder="Recipe Title">
+    <textarea name="" id="" cols="30" rows="10" class="instructions-input" placeholder="Enter Recipe Instructions"></textarea>
+    <div class="ingredients">
+      <h2 class="ingredients__header">Ingredients</h2>
+      <div class="list-item">
+        <input type="checkbox" id="ingredient" class="list-item__checkbox" name="ingredient">
+        <label for="ingredient" class="list-item__label">Ingredient 1</label>
+        <button class="list-item__button">remove</button>
+      </div>
+    </div>
+    <div class="add-ingredient">
+      <input type="text" class="add-ingredient__input" placeholder="ingredient">
+      <button class="add-ingredient__button">Add Ingredient</button>
+    </div>
+    <div class="delete-recipe">
+      <h2 class="delete-recipe__title">Danger Zone</h2>
+      <button class="delete-recipe__button">Delete recipe</button>
+    </div>
+  </div>
   <script src="./scripts/bundle.js"></script>
 </body>
 </html>
