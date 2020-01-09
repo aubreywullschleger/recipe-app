@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Boilerplate App</title>
-</head>
-<body>
-  <h1>boilerplate</h1>
-  <script src="./scripts/bundle.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Recipe App</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Recipe App</h1>
+    </header>
+    <main>
+      <div class="actions">
+        <input
+          type="text"
+          class="actions--search"
+          placeholder="search recipes"
+        />
+      </div>
+      <div class="container">
+        <div class="recipes">
+          <div class="recipe-item">
+            <h2 class="recipe-item__title">Recipe 1</h2>
+            <p class="recipe-item__summary">You have all the ingredients</p>
+          </div>
+          <div class="recipe-item">
+            <h2 class="recipe-item__title">Recipe 2</h2>
+            <p class="recipe-item__summary">You have some of the ingredients</p>
+          </div>
+          <div class="recipe-item">
+            <h2 class="recipe-item__title">Recipe 3</h2>
+            <p class="recipe-item__summary">You have none of the ingredients</p>
+          </div>
+        </div>
+        <a href="./edit.html" class="button"><button class="button--add">Add Recipe</button></a>
+      </div>
+    </main>
+
+    <script src="./scripts/bundle.js"></script>
+  </body>
 </html>
