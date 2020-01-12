@@ -5,28 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Recipe App</title>
+  <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
-  <div class="container">
-    <input type="text" class="title-input" placeholder="Recipe Title">
-    <textarea name="" id="" cols="30" rows="10" class="instructions-input" placeholder="Enter Recipe Instructions"></textarea>
-    <div class="ingredients">
-      <h2 class="ingredients__header">Ingredients</h2>
-      <div class="list-item">
-        <input type="checkbox" id="ingredient" class="list-item__checkbox" name="ingredient">
-        <label for="ingredient" class="list-item__label">Ingredient 1</label>
-        <button class="list-item__button">remove</button>
+  <main>
+    <div class="edit-container">
+      <input type="text" class="title-input" placeholder="Recipe Title">
+      <textarea name="" id="" cols="30" rows="10" class="instructions-input" placeholder="Enter Recipe Instructions"></textarea>
+      <div class="ingredients-container">
+        <h2 class="ingredients__header">Ingredients</h2>
+        <div class="ingredient-list">
+          <div class="list-item">
+            <div class="list-item__ingredient-checkbox">
+              <input type="checkbox" id="ingredient-one" class="list-item__checkbox" name="ingredient">
+              <label for="ingredient-one" class="list-item__label">Ingredient 1</label>
+            </div>
+            <button class="list-item__button">remove</button>
+          </div>
+          <div class="list-item">
+            <div class="list-item__ingredient-checkbox">
+              <input type="checkbox" id="ingredient-two" class="list-item__checkbox" name="ingredient">
+              <label for="ingredient-two" class="list-item__label">Ingredient 2</label>
+            </div>
+            <button class="list-item__button">remove</button>
+          </div>
+        </div>
+        <div class="add-ingredient">
+          <input type="text" class="add-ingredient__input" placeholder="ingredient">
+          <button class="add-ingredient__button">Add Ingredient</button>
+        </div>
+      </div>
+      
+      <div class="delete-recipe">
+        <h2 class="delete-recipe__title">Danger Zone</h2>
+        <button class="delete-recipe__button">Delete recipe</button>
       </div>
     </div>
-    <div class="add-ingredient">
-      <input type="text" class="add-ingredient__input" placeholder="ingredient">
-      <button class="add-ingredient__button">Add Ingredient</button>
-    </div>
-    <div class="delete-recipe">
-      <h2 class="delete-recipe__title">Danger Zone</h2>
-      <button class="delete-recipe__button">Delete recipe</button>
-    </div>
-  </div>
+  </main>
   <script src="./scripts/bundle.js"></script>
 </body>
 </html>
