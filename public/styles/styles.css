@@ -1,27 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0 auto;
-  padding-top: 2%;
+  padding-top: 2rem;
 }
 
 h1 {
   margin-top: 0;
+  margin-bottom: 1rem;
 }
 
+h2,
+p,
+.list-item__ingredient-checkbox input {
+  margin: 0;
+}
+
+header,
 main {
-  height: 55vh
-}
-
-header, main {
   width: 45%;
   margin: 0 auto;
 }
 
-textarea {
-  margin-top: 3%;
+input,
+textarea,
+.add-ingredient__button,
+.delete-recipe__title {
+  margin-bottom: 1rem;
 }
 
-.recipe-container, .recipes, .edit-container, .ingredients-container {
-  height: 100%;
+.recipe-container,
+.recipes,
+.edit-container,
+.ingredients-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -29,12 +42,14 @@ textarea {
 
 .recipe-item {
   border: 1px solid black;
-  padding: 2% 3%;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
 }
 
-.list-item, .ingredient-list {
+.list-item,
+.ingredient-list {
   display: flex;
-  padding: 2% 0;
+  padding: 0.5rem 0;
 }
 
 .ingredient-list {
@@ -42,6 +57,22 @@ textarea {
   justify-content: space-between;
 }
 
-.list-item__ingredient-checkbox {
+.list-item__ingredient-checkbox,
+.list-item__label {
+  align-self: center;
   flex-grow: 1;
+}
+
+@media (max-width: 389px) {
+  .list-item {
+    flex-direction: column;
+  }
+
+  .actions--search,
+  .button--add,
+  .add-ingredient__input,
+  .add-ingredient__button,
+  .delete-recipe__button {
+    width: 100%;
+  }
 }
