@@ -13,9 +13,10 @@
 
 import uuidv4 from "uuid/v4"
 
-const addRecipeElement = document.querySelector(".button--add")
+const addRecipeEl = document.querySelector("#add-recipe")
+console.log(addRecipeEl)
 
-addRecipeElement.addEventListener("click", e => {
+addRecipeEl.addEventListener("click", e => {
   let recipe = {
     id: uuidv4()
   }
