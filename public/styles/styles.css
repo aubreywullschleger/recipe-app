@@ -68,6 +68,10 @@ textarea,
   flex-grow: 1;
 }
 
+.list-item__ingredient-checkbox input {
+  margin-right: 0.5rem;
+}
+
 @media (max-width: 389px) {
   .list-item {
     flex-direction: column;
