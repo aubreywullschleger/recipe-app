@@ -36,6 +36,7 @@ const generateIngredientDOM = ingredient => {
 
   // Set up button
   removeButton.classList.add("list-item__button")
+  removeButton.id = `removeIngredient-${id}`
   removeButton.innerHTML = "Remove"
   listItem.appendChild(removeButton)
 
@@ -52,12 +53,19 @@ const getIngredientList = () => ingredientList
 
 // Toggle ingredient checkbox
 const toggleIngredientCheckbox = id => {
-  console.log(id)
   const checkbox = document.getElementById(`${id}`)
   let ingredient = ingredientList[id]
   ingredient.hasIngredient = checkbox.checked
-  console.log(ingredient)
   return ingredientList
 }
 
-export { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox }
+// Remove ingredient 
+const removeIngredient = id => {
+  const ingredientRemoveButtonEl = document.querySelector(`#removeIngredient-${id}`)
+
+  ingredientRemoveButtonEl.parentNode.remove(ingredientRemoveButtonEl)
+
+  delete ingredientList[id]
+}
+
+export { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient }

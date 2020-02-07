@@ -1,4 +1,4 @@
-import { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, getIngredientId } from "./ingredients"
+import { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, getIngredientId, removeIngredient } from "./ingredients"
 
 const titleEl = document.querySelector("#recipe-title")
 const instructionsEl = document.querySelector("#recipe-instructions")
@@ -39,5 +39,16 @@ saveRecipeEl.addEventListener("click", e => {
 document.addEventListener("click", e => {
   if(e.target.type === "checkbox") {
     toggleIngredientCheckbox(e.target.id)
+  }
+})
+
+// Listen for remove ingredient click
+document.addEventListener("click", e => {
+  const id = e.target.id
+  const partialIdStart = id.substring(0,16)
+  const partialIdEnd = id.substring(17)
+
+  if(e.target.type === "submit" && partialIdStart === "removeIngredient") {
+    removeIngredient(partialIdEnd)
   }
 })
