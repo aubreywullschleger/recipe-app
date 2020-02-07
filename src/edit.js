@@ -1,5 +1,6 @@
 import uuidv4 from "uuid/v4"
 
+
 const titleEl = document.querySelector("#recipe-title")
 const instructionsEl = document.querySelector("#recipe-instructions")
 const ingredientNameEl = document.querySelector("#ingredient-name")
@@ -52,10 +53,16 @@ const generateIngredientDOM = ingredient => {
 
 // Add ingredient event
 addIngredientEl.addEventListener("click", e => {
-  console.log(ingredientNameEl.value)
   if (ingredientNameEl.value.length > 0) {
     ingredientListEl.appendChild(generateIngredientDOM(ingredientNameEl.value))
   }
   ingredientNameEl.value = ""
 })
-//add ingredient button: add another event listener for enter key on keyup, if e.keycode === 13 do something
+
+// Trigger add ingredient event on enter keypress
+ingredientNameEl.addEventListener("keyup", e => {
+  // e.preventDefault()
+  if (e.code === "Enter" ) {
+    addIngredientEl.click()
+  }
+})

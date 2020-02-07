@@ -11,14 +11,11 @@
 //   id: 1234
 // }
 
-import uuidv4 from "uuid/v4"
+import { createRecipe } from "./recipes"
 
-const addRecipeEl = document.querySelector("#add-recipe")
-console.log(addRecipeEl)
+const addRecipeEl = document.querySelector("#create-recipe")
 
 addRecipeEl.addEventListener("click", e => {
-  let recipe = {
-    id: uuidv4()
-  }
-  window.location.assign(`./edit.html#${recipe.id}`)
+  const id = createRecipe()
+  window.location.assign(`./edit.html#${id}`)
 })
