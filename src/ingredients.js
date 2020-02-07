@@ -52,8 +52,11 @@ const getIngredientList = () => ingredientList
 
 // Toggle ingredient checkbox
 const toggleIngredientCheckbox = id => {
+  console.log(id)
+  const checkbox = document.getElementById(`${id}`)
   let ingredient = ingredientList[id]
-  ingredient.hasIngredient = !ingredient.hasIngredient
+  ingredient.hasIngredient = checkbox.checked
+  console.log(ingredient)
   return ingredientList
 }
 
