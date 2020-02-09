@@ -1,4 +1,5 @@
-import { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, getIngredientId, removeIngredient } from "./ingredients"
+import { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient } from "./ingredients"
+import {saveRecipe} from "./recipe"
 
 const titleEl = document.querySelector("#recipe-title")
 const instructionsEl = document.querySelector("#recipe-instructions")
@@ -8,11 +9,6 @@ const ingredientNameEl = document.querySelector("#ingredient-name")
 const addIngredientEl = document.querySelector("#add-ingredient")
 
 const saveRecipeEl = document.querySelector("#save-recipe")
-
-titleEl.addEventListener("input", e => console.log(e.target.value))
-instructionsEl.addEventListener("input", e => console.log(e.target.value))
-
-
 
 // Add ingredient event
 addIngredientEl.addEventListener("click", e => {
@@ -31,8 +27,17 @@ ingredientNameEl.addEventListener("keyup", e => {
 
 // Save recipe event
 saveRecipeEl.addEventListener("click", e => {
-  getIngredientList()
-  window.location.assign("./index.html")
+  let url = window.location.href
+  const id = url.toString().split("#")[1]
+
+  let recipe = {
+    id: id,
+    title: titleEl.value,
+    instructions: instructionsEl.value,
+    ingredients: getIngredientList()
+  }
+  saveRecipe(recipe)
+  // window.location.assign("./index.html")
 })
 
 // Listen for has ingredient checkbox toggle 
