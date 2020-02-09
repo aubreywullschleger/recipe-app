@@ -1,5 +1,5 @@
 import { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient } from "./ingredients"
-import {saveRecipe} from "./recipe"
+import {saveRecipe} from "./recipes"
 
 const titleEl = document.querySelector("#recipe-title")
 const instructionsEl = document.querySelector("#recipe-instructions")
@@ -37,7 +37,7 @@ saveRecipeEl.addEventListener("click", e => {
     ingredients: getIngredientList()
   }
   saveRecipe(recipe)
-  // window.location.assign("./index.html")
+  window.location.assign("./index.html")
 })
 
 // Listen for has ingredient checkbox toggle 
