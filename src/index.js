@@ -12,11 +12,12 @@
 // }
 
 import uuidv4 from "uuid/v4"
-import { loadRecipes } from "./recipes"
+import { loadRecipes, generateRecipeCardDOM } from "./recipes"
 
 const addRecipeEl = document.querySelector("#create-recipe")
 
 const recipes = loadRecipes()
+generateRecipeCardDOM(recipes)
 
 addRecipeEl.addEventListener("click", e => {
   const id = uuidv4()
