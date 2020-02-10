@@ -1,76 +1,41 @@
-let recipes = JSON.parse(localStorage.getItem("recipes")) || []
+import uuidv4 from "uuid/v4"
 
-// Get Recipes
+let recipes = []
+
+// Get recipes from module
 const getRecipes = () => recipes
 
-// Load recipes
+// Load recipes from localStorage
 const loadRecipes = () => {
-  const recipes = getRecipes()
-  return recipes
+  const recipesJSON = localStorage.getItem("recipes")
+
+  try {
+    return recipesJSON ? JSON.parse(recipesJSON) : []
+  } catch (e) {
+    return []
+  }
 }
 
 // Save recipe
-const saveRecipe = recipe => {
-  recipes.push(recipe)
+const saveRecipes = recipe => {
   localStorage.setItem("recipes", JSON.stringify(recipes))
-  return recipe
 }
 
-// Generate recipe card
-const generateRecipeCardDOM = recipes => {
-  // Setup recipe list
-  const recipesEl = document.querySelector("#recipe-list")
+// Create recipe 
+const createRecipe = () => {
+  const id = uuidv4()
 
-  if (recipes.length === 0) {
-    const noRecipesMessageEl = document.createElement("h2")
-    noRecipesMessageEl.innerHTML = "No recipes to show"
-    recipesEl.appendChild(noRecipesMessageEl)
-  }
-
-  recipes.forEach(recipe => {
-    // Setup recipe item
-    const recipeItemEl = document.createElement("div")
-    recipeItemEl.classList.add("recipe-item")
-
-    // Setup recipe title
-    const recipeTitleEl = document.createElement("h2")
-    recipeTitleEl.classList.add("recipe-item__title")
-    recipeTitleEl.innerHTML = recipe.title 
-    recipeItemEl.appendChild(recipeTitleEl)
-
-    // Setup recipe summary
-    const recipeSummaryEl = document.createElement("p")
-    recipeSummaryEl.classList.add("recipe-item__summary")
-
-    let summaryMessage = generateSummaryMessage(recipe.ingredients)
-    recipeSummaryEl.innerHTML = summaryMessage
-    recipeItemEl.appendChild(recipeSummaryEl)
-
-    recipesEl.appendChild(recipeItemEl)
+  recipes.push({
+    id: id,
+    title: "",
+    instructions: "",
+    ingredients: {}
   })
+  saveRecipes()
 
-  return recipesEl
+  return id
 }
 
-// Generate summary message
-const generateSummaryMessage = ingredientsObject => {
-  let hasIngredientCount = 0
+recipes = loadRecipes()
 
-  for (let ingredient in ingredientsObject) {
-    if (Object.keys(ingredientsObject).length > 0 && ingredientsObject[`${ingredient}`].hasIngredient) {
-      hasIngredientCount += 1
-    }
-  }
-
-  if(hasIngredientCount === Object.keys(ingredientsObject).length && Object.keys(ingredientsObject).length > 0) {
-    return "You have all the ingredients"
-  } else if (hasIngredientCount < Object.keys(ingredientsObject).length && hasIngredientCount !== 0) {
-    return "You have some of the ingredients"
-  } else if (hasIngredientCount === 0 && Object.keys(ingredientsObject).length > 0) {
-    return "You have none of the ingredients"
-  } else {
-    return "You have no ingredients listed for this recipe"
-  }
-}
-
-export { saveRecipe, loadRecipes, getRecipes, generateRecipeCardDOM }
+export { saveRecipes, loadRecipes, getRecipes, createRecipe }

@@ -10,16 +10,29 @@
 //   ],
 //   id: 1234
 // }
+import { renderRecipes } from "./views"
+import { loadRecipes, generateRecipeCardDOM, createRecipe } from "./recipes"
 
-import uuidv4 from "uuid/v4"
-import { loadRecipes, generateRecipeCardDOM } from "./recipes"
+renderRecipes()
 
 const addRecipeEl = document.querySelector("#create-recipe")
 
-const recipes = loadRecipes()
-generateRecipeCardDOM(recipes)
-
 addRecipeEl.addEventListener("click", e => {
-  const id = uuidv4()
+  const id = createRecipe()
   window.location.assign(`./edit.html#${id}`)
+})
+
+document.addEventListener("click", e => {
+  const id = e.target.id
+  const partialIdEnd = id.substring(12)
+
+  if (e.target.classList[0].substring(0,11) === "recipe-item") {
+    window.location.assign(`./edit.html#${partialIdEnd}`)
+  }
+})
+
+window.addEventListener("storage",  e => {
+  if (e.key === "recipes") {
+    renderRecipes()
+  }
 })
