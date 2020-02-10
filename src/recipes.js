@@ -42,25 +42,7 @@ const generateRecipeCardDOM = recipes => {
     const recipeSummaryEl = document.createElement("p")
     recipeSummaryEl.classList.add("recipe-item__summary")
 
-    let hasIngredientCount = 0
-    let summaryMessage
-
-    for (let ingredient in recipe.ingredients) {
-      if (Object.keys(recipe.ingredients).length > 0 && recipe.ingredients[`${ingredient}`].hasIngredient) {
-        hasIngredientCount += 1
-      }
-    }
-
-    if(hasIngredientCount === Object.keys(recipe.ingredients).length && Object.keys(recipe.ingredients).length > 0) {
-      summaryMessage = "You have all the ingredients"
-    } else if (hasIngredientCount < Object.keys(recipe.ingredients).length && hasIngredientCount !== 0) {
-      summaryMessage = "You have some of the ingredients"
-    } else if (hasIngredientCount === 0 && Object.keys(recipe.ingredients).length > 0) {
-      summaryMessage = "You have none of the ingredients"
-    } else {
-      summaryMessage = "You have no ingredients listed for this recipe"
-    }
-
+    let summaryMessage = generateSummaryMessage(recipe.ingredients)
     recipeSummaryEl.innerHTML = summaryMessage
     recipeItemEl.appendChild(recipeSummaryEl)
 
@@ -68,6 +50,27 @@ const generateRecipeCardDOM = recipes => {
   })
 
   return recipesEl
+}
+
+// Generate summary message
+const generateSummaryMessage = ingredientsObject => {
+  let hasIngredientCount = 0
+
+  for (let ingredient in ingredientsObject) {
+    if (Object.keys(ingredientsObject).length > 0 && ingredientsObject[`${ingredient}`].hasIngredient) {
+      hasIngredientCount += 1
+    }
+  }
+
+  if(hasIngredientCount === Object.keys(ingredientsObject).length && Object.keys(ingredientsObject).length > 0) {
+    return "You have all the ingredients"
+  } else if (hasIngredientCount < Object.keys(ingredientsObject).length && hasIngredientCount !== 0) {
+    return "You have some of the ingredients"
+  } else if (hasIngredientCount === 0 && Object.keys(ingredientsObject).length > 0) {
+    return "You have none of the ingredients"
+  } else {
+    return "You have no ingredients listed for this recipe"
+  }
 }
 
 export { saveRecipe, loadRecipes, getRecipes, generateRecipeCardDOM }
