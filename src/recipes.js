@@ -51,12 +51,14 @@ const generateRecipeCardDOM = recipes => {
       }
     }
 
-    if(hasIngredientCount === Object.keys(recipe.ingredients).length) {
+    if(hasIngredientCount === Object.keys(recipe.ingredients).length && Object.keys(recipe.ingredients).length > 0) {
       summaryMessage = "You have all the ingredients"
-    } else if (hasIngredientCount < recipe.ingredients.length) {
+    } else if (hasIngredientCount < Object.keys(recipe.ingredients).length && hasIngredientCount !== 0) {
       summaryMessage = "You have some of the ingredients"
-    } else {
+    } else if (hasIngredientCount === 0 && Object.keys(recipe.ingredients).length > 0) {
       summaryMessage = "You have none of the ingredients"
+    } else {
+      summaryMessage = "You have no ingredients listed for this recipe"
     }
 
     recipeSummaryEl.innerHTML = summaryMessage
