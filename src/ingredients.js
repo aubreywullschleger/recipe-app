@@ -42,15 +42,14 @@ const generateIngredientDOM = ingredient => {
 const createIngredient = () => {
   const ingredientNameEl = document.querySelector("#ingredient-name")
   const id = uuidv4()
-  if(ingredientNameEl.value > 0) {
+  if(ingredientNameEl.value.length > 0) {
     ingredientList[id] = {
       id: id,
       name: ingredientNameEl.value,
       hasIngredient: false
     }
   }
-  ingredientNameEl.value = ""
-  return id
+  return ingredientList[id]
 }
 
 // Get ingredients 
@@ -85,6 +84,7 @@ const renderIngredients = recipe => {
     ingredientListEl.appendChild(noIngredientsMessageEl)
   } else {
     for (let ingredient in ingredients) {
+      noIngredientsMessageEl.remove()
       const ingredientItemEl = generateIngredientDOM(ingredients[ingredient])
       ingredientListEl.appendChild(ingredientItemEl)
     }

@@ -72,11 +72,12 @@ const initializeEditPage = recipeId => {
 
   const recipes = getRecipes()
   const recipe = recipes.find(recipe => recipe.id === recipeId)
+  
 
   titleEl.value = recipe.title
   instructionsEl.value = recipe.instructions
-  ingredientsEl.value = recipe.ingredients
-  
+  ingredientsEl.value = renderIngredients(recipe)
+
   return recipe
 }
 export { renderRecipes, initializeEditPage }

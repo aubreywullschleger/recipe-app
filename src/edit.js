@@ -5,13 +5,15 @@ import { initializeEditPage } from "./views"
 const ingredientNameEl = document.querySelector("#ingredient-name")
 const addIngredientEl = document.querySelector("#add-ingredient")
 const saveRecipeEl = document.querySelector("#save-recipe")
+const ingredientListEl = document.querySelector("#ingredient-list")
 const recipeId = location.hash.substring(1)
 
-const recipe = initializeEditPage(recipeId)
-renderIngredients(recipe)
+initializeEditPage(recipeId)
+
 // Add ingredient event
 addIngredientEl.addEventListener("click", e => {
   ingredientListEl.appendChild(generateIngredientDOM(createIngredient()))
+  ingredientNameEl.value = ""
 })
 
 // Trigger add ingredient event on enter keypress
