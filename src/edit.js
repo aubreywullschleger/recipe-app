@@ -1,13 +1,14 @@
-import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients, getIngredientList } from "./ingredients"
-import { saveRecipes, createRecipe, updateRecipe } from "./recipes"
+import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient, createIngredient, getIngredientList } from "./ingredients"
+import { updateRecipe, deleteRecipe } from "./recipes"
 import { initializeEditPage } from "./views"
 
+const titleEl = document.querySelector("#recipe-title")
+const instructionsEl = document.querySelector("#recipe-instructions")
+const ingredientListEl = document.querySelector("#ingredient-list")
 const ingredientNameEl = document.querySelector("#ingredient-name")
 const addIngredientEl = document.querySelector("#add-ingredient")
 const saveRecipeEl = document.querySelector("#save-recipe")
-const ingredientListEl = document.querySelector("#ingredient-list")
-const titleEl = document.querySelector("#recipe-title")
-const instructionsEl = document.querySelector("#recipe-instructions")
+const deleteRecipeEl = document.querySelector("#delete-recipe")
 const recipeId = location.hash.substring(1)
 
 initializeEditPage(recipeId)
@@ -23,17 +24,6 @@ ingredientNameEl.addEventListener("keyup", e => {
   if (e.code === "Enter" ) {
     addIngredientEl.click()
   }
-})
-
-// Save recipe event
-saveRecipeEl.addEventListener("click", e => {
-  let url = window.location.href
-  const recipe = updateRecipe(recipeId, {
-    title: titleEl.value,
-    instructions: instructionsEl.value,
-    ingredients: getIngredientList()
-  })
-  window.location.assign("./index.html")
 })
 
 // Listen for has ingredient checkbox toggle 
@@ -52,4 +42,20 @@ document.addEventListener("click", e => {
   if(e.target.type === "submit" && partialIdStart === "removeIngredient") {
     removeIngredient(partialIdEnd)
   }
+})
+
+// Save recipe event
+saveRecipeEl.addEventListener("click", e => {
+  updateRecipe(recipeId, {
+    title: titleEl.value.length > 0 ? titleEl.value : "Recipe needs title",
+    instructions: instructionsEl.value.length > 0 ? instructionsEl.value : "Recipe needs instructions",
+    ingredients: getIngredientList()
+  })
+  window.location.assign("./index.html")
+})
+
+// Listen for delete recipe event
+deleteRecipeEl.addEventListener("click", e => {
+  deleteRecipe(recipeId)
+  location.assign("./index.html")
 })
