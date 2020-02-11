@@ -36,6 +36,27 @@ const createRecipe = () => {
   return id
 }
 
+// Update recipe
+const updateRecipe = (id, updates) => {
+  const recipe = recipes.find(recipe => recipe.id === id)
+  if (!recipe) {
+    return
+  }
+  if (typeof updates.title === "string") {
+    recipe.title = updates.title
+  }
+  if (typeof updates.instructions === "string") {
+    recipe.instructions = updates.instructions
+  }
+  if (typeof updates.ingredients === "object") {
+    recipe.ingredients = updates.ingredients
+  }
+
+  saveRecipes()
+
+  return recipe
+}
+
 recipes = loadRecipes()
 
-export { saveRecipes, loadRecipes, getRecipes, createRecipe }
+export { saveRecipes, loadRecipes, getRecipes, createRecipe, updateRecipe }

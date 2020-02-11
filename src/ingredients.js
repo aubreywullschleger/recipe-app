@@ -19,6 +19,7 @@ const generateIngredientDOM = ingredient => {
   checkbox.id = `${ingredient.id}`
   checkbox.name = "ingredient"
   checkbox.classList.add("list-item__checkbox")  
+  checkbox.checked = ingredient.hasIngredient
   ingredientCheckbox.appendChild(checkbox)
 
   // Set up label
@@ -78,17 +79,12 @@ const renderIngredients = recipe => {
   ingredientList = recipe.ingredients
   const ingredients = getIngredientList()
   
-  if (Object.keys(ingredients).length === 0) {
-    const noIngredientsMessageEl = document.createElement("p")
-    noIngredientsMessageEl.innerHTML = "No ingredients added to recipe"
-    ingredientListEl.appendChild(noIngredientsMessageEl)
-  } else {
+  if (Object.keys(ingredients).length > 0) {
     for (let ingredient in ingredients) {
-      noIngredientsMessageEl.remove()
       const ingredientItemEl = generateIngredientDOM(ingredients[ingredient])
       ingredientListEl.appendChild(ingredientItemEl)
     }
-  }
+  } 
 }
 
 export { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients }

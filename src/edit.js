@@ -1,11 +1,13 @@
-import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients } from "./ingredients"
-import { saveRecipes, createRecipe } from "./recipes"
+import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients, getIngredientList } from "./ingredients"
+import { saveRecipes, createRecipe, updateRecipe } from "./recipes"
 import { initializeEditPage } from "./views"
 
 const ingredientNameEl = document.querySelector("#ingredient-name")
 const addIngredientEl = document.querySelector("#add-ingredient")
 const saveRecipeEl = document.querySelector("#save-recipe")
 const ingredientListEl = document.querySelector("#ingredient-list")
+const titleEl = document.querySelector("#recipe-title")
+const instructionsEl = document.querySelector("#recipe-instructions")
 const recipeId = location.hash.substring(1)
 
 initializeEditPage(recipeId)
@@ -26,7 +28,11 @@ ingredientNameEl.addEventListener("keyup", e => {
 // Save recipe event
 saveRecipeEl.addEventListener("click", e => {
   let url = window.location.href
-  saveRecipes(createRecipe())
+  const recipe = updateRecipe(recipeId, {
+    title: titleEl.value,
+    instructions: instructionsEl.value,
+    ingredients: getIngredientList()
+  })
   window.location.assign("./index.html")
 })
 
