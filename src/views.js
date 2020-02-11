@@ -1,4 +1,5 @@
 import { getRecipes } from "./recipes"
+import { renderIngredients } from "./ingredients"
 
 // Generate recipe card
 const generateRecipeCardDOM = recipe => {
@@ -7,7 +8,6 @@ const generateRecipeCardDOM = recipe => {
     recipeItemEl.setAttribute("href", `./edit.html#${recipe.id}`)
     recipeItemEl.classList.add("recipe-item")
     
-
     // Setup recipe title
     const recipeTitleEl = document.createElement("h2")
     recipeTitleEl.classList.add("recipe-item__title")
@@ -76,5 +76,7 @@ const initializeEditPage = recipeId => {
   titleEl.value = recipe.title
   instructionsEl.value = recipe.instructions
   ingredientsEl.value = recipe.ingredients
+  
+  return recipe
 }
 export { renderRecipes, initializeEditPage }

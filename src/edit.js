@@ -1,21 +1,17 @@
-import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient } from "./ingredients"
+import { generateIngredientDOM, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients } from "./ingredients"
 import { saveRecipes, createRecipe } from "./recipes"
 import { initializeEditPage } from "./views"
 
-let ingredientListEl = document.querySelector("#ingredient-list")
 const ingredientNameEl = document.querySelector("#ingredient-name")
 const addIngredientEl = document.querySelector("#add-ingredient")
 const saveRecipeEl = document.querySelector("#save-recipe")
 const recipeId = location.hash.substring(1)
 
-initializeEditPage(recipeId)
-
+const recipe = initializeEditPage(recipeId)
+renderIngredients(recipe)
 // Add ingredient event
 addIngredientEl.addEventListener("click", e => {
-  if (ingredientNameEl.value.length > 0) {
-    ingredientListEl.appendChild(generateIngredientDOM(ingredientNameEl.value))
-  }
-  ingredientNameEl.value = ""
+  ingredientListEl.appendChild(generateIngredientDOM(createIngredient()))
 })
 
 // Trigger add ingredient event on enter keypress

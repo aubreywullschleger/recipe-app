@@ -4,48 +4,53 @@ let ingredientList = {}
 
 // Generate new ingredient element
 const generateIngredientDOM = ingredient => {
-  const listItem = document.createElement("div")
-
-  const ingredientCheckbox = document.createElement("div")
-  const checkbox = document.createElement("input")
-  const label = document.createElement("label")
-
-  const removeButton = document.createElement("button")
-
-  const id = uuidv4()
-
   // Set up list item
+  const listItem = document.createElement("div")
   listItem.classList.add("list-item")
 
   // Set up ingredient checkbox
+  const ingredientCheckbox = document.createElement("div")
   ingredientCheckbox.classList.add("list-item__ingredient-checkbox")
   listItem.appendChild(ingredientCheckbox)
 
   // Set up checkbox
+  const checkbox = document.createElement("input")
   checkbox.setAttribute("type", "checkbox")
-  checkbox.id = `${id}`
+  checkbox.id = `${ingredient.id}`
   checkbox.name = "ingredient"
   checkbox.classList.add("list-item__checkbox")  
   ingredientCheckbox.appendChild(checkbox)
 
   // Set up label
-  label.setAttribute("for", `${id}`)
+  const label = document.createElement("label")
+  label.setAttribute("for", `${ingredient.id}`)
   label.classList.add("list-item__label")
-  label.innerHTML = ingredient
+  label.innerHTML = ingredient.name
   ingredientCheckbox.appendChild(label)
 
   // Set up button
+  const removeButton = document.createElement("button")
   removeButton.classList.add("list-item__button")
-  removeButton.id = `removeIngredient-${id}`
+  removeButton.id = `removeIngredient-${ingredient.id}`
   removeButton.innerHTML = "Remove"
   listItem.appendChild(removeButton)
 
-  ingredientList[id] = {
-    name: ingredient,
-    hasIngredient: checkbox.checked
-  }
-
   return listItem
+}
+
+// Create ingredient
+const createIngredient = () => {
+  const ingredientNameEl = document.querySelector("#ingredient-name")
+  const id = uuidv4()
+  if(ingredientNameEl.value > 0) {
+    ingredientList[id] = {
+      id: id,
+      name: ingredientNameEl.value,
+      hasIngredient: false
+    }
+  }
+  ingredientNameEl.value = ""
+  return id
 }
 
 // Get ingredients 
@@ -68,4 +73,22 @@ const removeIngredient = id => {
   delete ingredientList[id]
 }
 
-export { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient }
+// Render ingredients 
+const renderIngredients = recipe => {
+  const ingredientListEl = document.querySelector("#ingredient-list")
+  ingredientList = recipe.ingredients
+  const ingredients = getIngredientList()
+  
+  if (Object.keys(ingredients).length === 0) {
+    const noIngredientsMessageEl = document.createElement("p")
+    noIngredientsMessageEl.innerHTML = "No ingredients added to recipe"
+    ingredientListEl.appendChild(noIngredientsMessageEl)
+  } else {
+    for (let ingredient in ingredients) {
+      const ingredientItemEl = generateIngredientDOM(ingredients[ingredient])
+      ingredientListEl.appendChild(ingredientItemEl)
+    }
+  }
+}
+
+export { generateIngredientDOM, getIngredientList, toggleIngredientCheckbox, removeIngredient, createIngredient, renderIngredients }
