@@ -1,4 +1,5 @@
 import { getRecipes } from "./recipes"
+import { getFilters } from "./filters"
 import { renderIngredients } from "./ingredients"
 
 // Generate recipe card
@@ -50,17 +51,21 @@ const generateSummaryMessage = ingredientsObject => {
 const renderRecipes = () => {
    // Setup recipe list
    const recipesEl = document.querySelector("#recipe-list")
+   const filters = getFilters()
    const recipes = getRecipes()
+   const filteredRecipes = recipes.filter(recipe => recipe.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
-   if (recipes.length === 0) {
-    const noRecipesMessageEl = document.createElement("h2")
-    noRecipesMessageEl.innerHTML = "No recipes to show"
-    recipesEl.appendChild(noRecipesMessageEl)
-  } else {
-    recipes.forEach(recipe => {
+   recipesEl.innerHTML = ""
+
+   if (filteredRecipes.length > 0) {
+    filteredRecipes.forEach(recipe => {
       const recipeItemEl = generateRecipeCardDOM(recipe)
       recipesEl.appendChild(recipeItemEl)
     })
+  } else {
+    const noRecipesMessageEl = document.createElement("h2")
+    noRecipesMessageEl.innerHTML = "No recipes to show"
+    recipesEl.appendChild(noRecipesMessageEl)
   }
 }
 
